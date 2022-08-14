@@ -1,3 +1,23 @@
-<h1>Admin Layout</h1>
+<nav class="navbar bg-primary">
+  <h1>
+    <a routerLink="/">Angular Admin</a>
+  </h1>
 
-<router-outlet></router-outlet>
+  <ul>
+    <li routerLinkActive="active">
+      <a [routerLink]="['dashboard']">Main</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a [routerLink]="['create']">Create</a>
+    </li>
+
+    <li>
+      <a href="#" (click)="logout($event)">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
