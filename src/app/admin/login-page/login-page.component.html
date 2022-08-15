@@ -1,1 +1,49 @@
-<p>login-page works!</p>
+<form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Login to admin panel</h2>
+
+  <div
+    class="form-control"
+    [ngClass]="{ invalid: form.get('email').invalid && form.get('email').touched }"
+  >
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" >
+
+    <div
+      *ngIf="form.get('email').invalid && form.get('email').touched"
+      class="validation"
+    >
+      <small *ngIf="form.get('email').errors.required">
+        Press the email!
+      </small>
+
+      <small *ngIf="form.get('email').errors.email">
+        Press the correct email!
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{ invalid: form.get('password').invalid && form.get('password').touched }"
+  >
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password">
+
+    <div
+      *ngIf="form.get('password').invalid && form.get('password').touched"
+      class="validation"
+    >
+      <small *ngIf="form.get('password').errors.required">
+        Press the password!
+      </small>
+
+      <small *ngIf="form.get('password').errors.minlength">
+        The password must be more than 5 symbols!
+      </small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    Login
+  </button>
+</form>
