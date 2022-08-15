@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { User } from "../../shared/interfaces";
+import { AuthService } from "../shared/services/auth.service";
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +12,11 @@ import { User } from "../../shared/interfaces";
 })
 export class LoginPageComponent implements OnInit {
   public form: FormGroup;
+
+  constructor(private authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -24,11 +31,16 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.form.invalid) {
       return;
     }
 
     const user: User = this.form.value;
+
+    this.authService.login(user).subscribe(() => {
+      this.form.reset();
+      this.router.navigate(['dashboard'], { relativeTo: this.route });
+    });
   }
 }
