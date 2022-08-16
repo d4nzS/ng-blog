@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 import { User } from "../../shared/interfaces";
 import { AuthService } from "../shared/services/auth.service";
@@ -14,8 +14,7 @@ export class LoginPageComponent implements OnInit {
   public form: FormGroup;
 
   constructor(private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) {
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -38,9 +37,9 @@ export class LoginPageComponent implements OnInit {
 
     const user: User = this.form.value;
 
-    this.authService.login(user).subscribe(() => {
+    this.authService.login(user).subscribe((response) => {
       this.form.reset();
-      this.router.navigate(['dashboard'], { relativeTo: this.route });
+      this.router.navigate(['/admin','dashboard'],);
     });
   }
 }
