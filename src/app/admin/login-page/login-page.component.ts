@@ -12,6 +12,7 @@ import { AuthService } from "../shared/services/auth.service";
 })
 export class LoginPageComponent implements OnInit {
   public form: FormGroup;
+  public submitted = false;
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -35,11 +36,14 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
+    this.submitted = true;
+
     const user: User = this.form.value;
 
     this.authService.login(user).subscribe((response) => {
       this.form.reset();
       this.router.navigate(['/admin','dashboard'],);
+      this.submitted = false;
     });
   }
 }
