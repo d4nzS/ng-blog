@@ -14,11 +14,11 @@ export class LoginPageComponent implements OnInit {
   public form: FormGroup;
   public submitted = false;
 
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
               private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form = new FormGroup({
       'email': new FormControl(null, [
         Validators.required,
@@ -40,10 +40,10 @@ export class LoginPageComponent implements OnInit {
 
     const user: User = this.form.value;
 
-    this.authService.login(user).subscribe((response) => {
+    this.authService.login(user).subscribe(() => {
       this.form.reset();
       this.router.navigate(['/admin','dashboard'],);
       this.submitted = false;
-    });
+    }, () => this.submitted = false);
   }
 }

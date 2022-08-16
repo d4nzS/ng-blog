@@ -10,7 +10,7 @@ import { AuthService } from "../../services/auth.service";
 export class AdminLayoutComponent {
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private authService: AuthService) {
+              public authService: AuthService) {
   }
 
   public logout(event: MouseEvent) {
