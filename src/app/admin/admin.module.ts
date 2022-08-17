@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
@@ -10,6 +10,7 @@ import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { AuthGuardService } from "./shared/services/auth-guard.service";
 import { SharedModule } from "../shared/shared.module";
+import { SearchPipe } from "./shared/search.pipe";
 
 const routes: Routes = [
   {
@@ -29,10 +30,12 @@ const routes: Routes = [
     LoginPageComponent,
     DashboardPageComponent,
     CreatePageComponent,
-    EditPageComponent
+    EditPageComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     SharedModule
