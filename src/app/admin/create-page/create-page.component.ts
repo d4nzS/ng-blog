@@ -33,7 +33,7 @@ export class CreatePageComponent implements OnInit {
       date: new Date()
     };
 
-    this.postService.create(post).subscribe(() => {
+    this.postService.createPost(post).subscribe(() => {
       this.form.reset();
     });
   }

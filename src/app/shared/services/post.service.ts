@@ -12,7 +12,7 @@ export class PostService {
   constructor(private http: HttpClient) {
   }
 
-  public create(post: Post): Observable<Post> {
+  public createPost(post: Post): Observable<Post> {
     return this.http.post<FbCreateResponse>(`${environment.fbDbUrl}/posts.json`, post)
       .pipe(map((response: FbCreateResponse) => ({
         ...post,
@@ -21,15 +21,24 @@ export class PostService {
       })));
   }
 
-  public getAll(): Observable<Post[]> {
+  public getAllPosts(): Observable<Post[]> {
     return this.http.get(`${environment.fbDbUrl}/posts.json`)
-      .pipe(map((response: {[key: string]: any}) => Object
-        .keys(response)
-        .map(key => ({
-          ...response[key],
-          id: key,
-          date: new Date(response[key].date)
-        }))
-      ))
+      .pipe(map(response => {
+          if (!response) {
+            return [];
+          }
+
+          return Object
+            .keys(response)
+            .map(key => ({
+              ...response[key],
+              id: key,
+              date: new Date(response[key].date)
+            }));
+        }));
+  }
+
+  public deletePost(id): Observable<void> {
+    return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`);
   }
 }
