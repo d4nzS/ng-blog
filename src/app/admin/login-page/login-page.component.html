@@ -5,6 +5,10 @@
     {{ error }}
   </div>
 
+  <div *ngIf="loginMessage" class="alert alert-info">
+    {{ loginMessage }}
+  </div>
+
   <div
     class="form-control"
     [ngClass]="{ invalid: form.get('email').invalid && form.get('email').touched }"
