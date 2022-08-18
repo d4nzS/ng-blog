@@ -1,6 +1,6 @@
-<div class="post">
+<div class="post" *ngIf="post | async as post; else loading">
   <div class="header">
-    <h1>Post title</h1>
+    <h1>{{ post.title }}</h1>
 
     <button
       routerLink="/"
@@ -9,14 +9,15 @@
   </div>
 
   <div class="info">
-    <strong>Author</strong>
-    <small>12.09.2022</small>
+    <strong>{{ post.author }}</strong>
+    <small>{{ post.date | date:'medium':null }}</small>
   </div>
 
   <div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur consequuntur earum, eius hic in molestias placeat quis, quos ratione, vero voluptatum. Distinctio, fugit impedit nulla quae quia ratione reprehenderit vitae voluptatem voluptatum! Ab ad aliquid autem dignissimos doloribus ducimus ipsa laudantium natus nulla, officia possimus quam rerum sapiente totam!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid distinctio, doloremque earum eum molestiae necessitatibus neque numquam, praesentium quidem quisquam quo, quod velit! Consequatur dolore doloremque eos molestias mollitia nemo non numquam optio, quisquam. Ab assumenda, autem distinctio eum eveniet harum iusto maiores praesentium qui quia ullam velit vero voluptatum!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at, aut beatae consectetur consequatur ducimus earum fuga illum in laudantium nisi non nulla odit, perspiciatis sed, sequi sit sunt tempora voluptas voluptatum? Error, fugiat, odio. Id, illum, officia? Accusantium culpa deserunt dicta dolor est exercitationem natus necessitatibus obcaecati quaerat ratione!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam culpa doloremque excepturi facilis, itaque natus neque nisi numquam provident quam repellendus soluta veniam voluptatum. Deserunt eum facilis fugit impedit libero maxime neque pariatur quae tenetur? Aperiam cum debitis harum minus perferendis quibusdam quo velit. Et eveniet maxime nostrum qui rerum.</p>
+    <quill-view-html [content]="post.text"></quill-view-html>
   </div>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Loading...</p>
+</ng-template>
