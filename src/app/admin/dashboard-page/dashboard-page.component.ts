@@ -26,7 +26,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.gSub.unsubscribe();
-    this.dSub.unsubscribe();
+    if (this.dSub) {
+      this.dSub.unsubscribe();
+    }
   }
 
   public onRemove(id: string): void {
